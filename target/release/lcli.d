@@ -1,1 +1,1 @@
-C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\target\release\lcli.exe: C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\main.rs
+C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\target\release\lcli.exe: C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\cli.rs C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\commands\about.rs C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\commands\list.rs C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\commands\mod.rs C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\commands\time.rs C:\Min\ Verdifulle\ Kode\Rust\ Shi\lcli\src\main.rs

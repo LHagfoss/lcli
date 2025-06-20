@@ -3,14 +3,26 @@ name = "lcli"
 version = "0.1.0"
 edition = "2024"
 
+[[bin]]
+name = "lcli"
+path = "src/main.rs"
+
+[[bin]]
+name = "lcli-installer"
+path = "src/bin/installer.rs"
+
+[[bin]]
+name = "lcli-uninstaller"
+path = "src/bin/uninstaller.rs"
+
 [dependencies]
+winreg = "0.55.0"
 clap = { version = "4.5.40", features = ["derive"] }
+serde_json = { version = "1.0.140" }
 owo-colors = { version = "4.2.1" }
-strum = { version = "0.27.0", features = ["derive"] }
-strum_macros = { version = "0.27" }
+strum = { version = "0.27.1", features = ["derive"] }
 tabled = { version = "0.20.0" }
 chrono = { version = "0.4.41" }
 serde = { version = "1.0.219", features = ["derive"] }
-serde_json = { version = "1.0.140" }
-winreg = "0.55.0"
 dirs = "6.0.0"
+console = "0.15.11"
