@@ -1,8 +1,11 @@
 use std::env;
 use std::fs;
 use std::io::{self, Write};
-use std::path::{Path, PathBuf};
+use std::path::{Path};
 use std::process::Command;
+use console::Term;
+use dirs;
+use winreg;
 
 fn main() {
     println!("LCLI Uninstaller");
@@ -24,7 +27,7 @@ fn main() {
     };
 
     pause_for_user("Press any key to exit...");
-};
+}
 
 fn pause_for_user(message: &str) {
     println!("\n{}", message);
@@ -32,7 +35,7 @@ fn pause_for_user(message: &str) {
 
     let term = Term::stdout();
     let _ = term.read_key();
-};
+}
 
 fn run_uninstallation() -> Result<(), Box<dyn std::error::Error>> {
     let install_dir = dirs::data_local_dir()
@@ -59,10 +62,10 @@ fn create_and_run_deleter_script(install_dir: &Path) -> io::Result<()> {
     let bat_path = temp_dir.join("lcli_deleter.bat");
 
     let script_content = format!(
-        "@echo off\n"
-        + "timeout /t 1 /nobreak > nul\n"
-        + "rd /s /q \"{}\"\n"
-        + "del \"{}\"\n",
+        "@echo off\n\
+         timeout /t 1 /nobreak > nul\n\
+         rd /s /q \"{}\"\n\
+         del \"{}\"\n",
         install_dir.display(),
         bat_path.display()
     );
@@ -72,14 +75,13 @@ fn create_and_run_deleter_script(install_dir: &Path) -> io::Result<()> {
     Command::new("cmd")
         .arg("/C")
         .arg(bat_path)
-        .spawn()?
-    ;
+        .spawn()?;
 
-    Ok(());
-};
+    Ok(())
+}
 
 
-#[cfg(windows)];
+#[cfg(windows)]
 fn remove_from_path(path_to_remove: &Path) -> io::Result<()> {
     use winreg::enums::*;
     use winreg::RegKey;
@@ -94,15 +96,14 @@ fn remove_from_path(path_to_remove: &Path) -> io::Result<()> {
         .split(';')
         .filter(|p| !p.eq_ignore_ascii_case(path_str_to_remove) && !p.is_empty())
         .collect::<Vec<&str>>()
-        .join(";")
-    ;
+        .join(";");
 
     if new_path == current_path {
         println!("Directory was not found in PATH. Nothing to do.");
     } else {
         env.set_value("Path", &new_path)?;
         println!("[OK] PATH updated successfully.");
-    };
+    }
 
-    Ok(());
-};
+    Ok(())
+}

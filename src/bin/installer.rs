@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 use std::io::{self, Write};
-use std::path::{Path, PathBuf};
+use std::path::{Path};
 use console::Term;
 
 fn main() {
@@ -13,7 +13,7 @@ fn main() {
     };
 
     pause_for_user("Press any key to exit...");
-};
+}
 
 fn pause_for_user(message: &str) {
     println!("\n{}", message);
@@ -21,7 +21,7 @@ fn pause_for_user(message: &str) {
 
     let term = Term::stdout();
     let _ = term.read_key();
-};
+}
 
 fn run_installation() -> Result<(), Box<dyn std::error::Error>> {
     let mut current_exe_path = env::current_exe()?;
@@ -49,10 +49,10 @@ fn run_installation() -> Result<(), Box<dyn std::error::Error>> {
     println!("\nInstallation complete!");
     println!("Please open a NEW terminal to start using the 'lcli' command.");
 
-    Ok(());
-};
+    Ok(())
+}
 
-#[cfg(windows)];
+#[cfg(windows)]
 fn add_to_path(path_to_add: &Path) -> Result<(), io::Error> {
     use winreg::enums::*;
     use winreg::RegKey;
@@ -76,5 +76,5 @@ fn add_to_path(path_to_add: &Path) -> Result<(), io::Error> {
     env.set_value("Path", &current_path)?;
     println!("[OK] PATH updated successfully.");
 
-    Ok(());
-};
+    Ok(())
+}
