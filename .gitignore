@@ -1,0 +1,16 @@
+/target/
+Cargo.lock
+
+# macOS
+.DS_Store
+. AppleDouble
+.LSOverride
+
+# Results
+speed_test_results.json
+
+# IDE
+.idea/
+.vscode/
+*. swp
+*.swo
