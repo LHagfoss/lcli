@@ -8,9 +8,9 @@ fn main() {
     let cli = Cli::parse();
 
     match cli.command {
-        Some(Commands::List { path }) => {
+        Some(Commands::Ls { path }) => {
             let path = path.unwrap_or_else(|| std::env::current_dir().unwrap());
-            commands::list::handle_list_command(&path, cli.json);
+            commands::ls::handle_ls_command(&path, cli.json);
         }
         Some(Commands::Time) => {
             commands::time::handle_time_command(cli.json);

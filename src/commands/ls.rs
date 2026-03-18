@@ -5,7 +5,7 @@ use std::{fs, path::Path};
 use strum::Display;
 use tabled::{
     settings::{
-        object::{Columns, Rows},
+        object::Columns,
         Color,
     }, Table,
     Tabled,
@@ -19,17 +19,17 @@ enum EntryType {
 
 #[derive(Debug, Tabled, Serialize)]
 struct FileEntry {
-    #[tabled(rename = "Name")]
+    #[tabled(rename = "File Name")]
     name: String,
     #[tabled(rename = "Type")]
     e_type: EntryType,
-    #[tabled(rename = "Type B")]
-    len_bytes: u64,
-    #[tabled(rename = "Modified")]
+    #[tabled(rename = "Size")]
+    size: String,
+    #[tabled(rename = "Last Modified")]
     modified: String,
 }
 
-pub fn handle_list_command(path: &Path, is_json: bool) {
+pub fn handle_ls_command(path: &Path, is_json: bool) {
     match get_files(path) {
         Ok(files) => {
             if is_json {
@@ -54,19 +54,21 @@ pub fn handle_list_command(path: &Path, is_json: bool) {
 
 fn print_table(get_files: Vec<FileEntry>) {
     let mut table = Table::new(get_files);
+
     table.with(tabled::settings::Style::rounded());
-    table.modify(Columns::first(), Color::FG_BRIGHT_CYAN);
-    table.modify(Columns::new(2..3), Color::FG_BRIGHT_MAGENTA);
-    table.modify(Columns::new(3..4), Color::FG_BRIGHT_YELLOW);
-    table.modify(Rows::first(), Color::FG_BRIGHT_GREEN);
+    table.modify(Columns::first(), Color::FG_WHITE);
+    table.modify(Columns::new(0..4), Color::FG_BRIGHT_WHITE);
+
     println!("{}", table);
 }
 
 fn get_files(path: &Path) -> std::io::Result<Vec<FileEntry>> {
     let mut data = Vec::default();
+
     for file in fs::read_dir(path)?.flatten() {
         map_data(file, &mut data);
     }
+
     Ok(data)
 }
 
@@ -79,7 +81,7 @@ fn map_data(file: fs::DirEntry, data: &mut Vec<FileEntry>) {
             } else {
                 EntryType::File
             },
-            len_bytes: meta.len(),
+            size: format_size(meta.len()),
             modified: if let Ok(modi) = meta.modified() {
                 let date: DateTime<Utc> = modi.into();
                 format!("{}", date.format("%a %b %e %Y"))
@@ -89,3 +91,23 @@ fn map_data(file: fs::DirEntry, data: &mut Vec<FileEntry>) {
         });
     }
 }
+
+
+/// monkey readable formatting for size
+fn format_size(bytes: u64) -> String {
+    const KB: f64 = 1024.0;
+    const MB: f64 = KB * 1024.0;
+    const GB: f64 = MB * 1024.0;
+
+    let bytes_f = bytes as f64;
+    if bytes_f >= GB {
+        format!("{:.2} GB", bytes_f / GB)
+    } else if bytes_f >= MB {
+        format!("{:.2} MB", bytes_f / MB)
+    } else if bytes_f >= KB {
+        format!("{:.2} KB", bytes_f / KB)
+    } else {
+        format!("{} B", bytes)
+    }
+}
+
