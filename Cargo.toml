@@ -3,6 +3,7 @@ name = "lcli"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
+authors = ["LHagfoss <lucash.1707@gmail.com>"]
 description = "A simple but effective internet speed test CLI tool built with Rust"
 homepage = "https://lhagfoss.com"
 repository = "https://github.com/LHagfoss/lcli"
@@ -11,16 +12,7 @@ repository = "https://github.com/LHagfoss/lcli"
 name = "lcli"
 path = "src/main.rs"
 
-[[bin]]
-name = "lcli-installer"
-path = "src/bin/installer.rs"
-
-[[bin]]
-name = "lcli-uninstaller"
-path = "src/bin/uninstaller.rs"
-
 [dependencies]
-winreg = "0.55.0"
 clap = { version = "4.5.40", features = ["derive"] }
 serde_json = { version = "1.0.140" }
 owo-colors = { version = "4.2.1" }

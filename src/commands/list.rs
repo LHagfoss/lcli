@@ -1,17 +1,14 @@
 use chrono::{DateTime, Utc};
 use owo_colors::OwoColorize;
 use serde::Serialize;
-use std::{
-    fs,
-    path::{Path},
-};
+use std::{fs, path::Path};
 use strum::Display;
 use tabled::{
     settings::{
         object::{Columns, Rows},
         Color,
-    },
-    Table, Tabled,
+    }, Table,
+    Tabled,
 };
 
 #[derive(Debug, Display, Serialize)]
@@ -67,10 +64,8 @@ fn print_table(get_files: Vec<FileEntry>) {
 
 fn get_files(path: &Path) -> std::io::Result<Vec<FileEntry>> {
     let mut data = Vec::default();
-    for entry in fs::read_dir(path)? {
-        if let Ok(file) = entry {
-            map_data(file, &mut data);
-        }
+    for file in fs::read_dir(path)?.flatten() {
+        map_data(file, &mut data);
     }
     Ok(data)
 }

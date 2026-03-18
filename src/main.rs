@@ -9,7 +9,7 @@ fn main() {
 
     match cli.command {
         Some(Commands::List { path }) => {
-            let path = path.unwrap_or_default();
+            let path = path.unwrap_or_else(|| std::env::current_dir().unwrap());
             commands::list::handle_list_command(&path, cli.json);
         }
         Some(Commands::Time) => {
@@ -19,7 +19,7 @@ fn main() {
             commands::about::handle_about_command();
         }
         None => {
-            println!("Please run 'lcli help' for more information.");
+            println!("Welcome to lcli! Use --help for more information.");
         }
     }
 }
