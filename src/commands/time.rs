@@ -19,7 +19,7 @@ pub fn handle_time_command(is_json: bool) {
     } else {
         println!(
             "Current Time: {}",
-            now.format("%Y-%m-%d %H:%M:%S %Z").bright_blue()
+            now.format("%H:%M:%S").to_string().bright_blue()
         );
     }
 }
