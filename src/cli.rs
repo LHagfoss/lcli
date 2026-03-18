@@ -19,7 +19,7 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
-    /// List files and directories in a given path
+    /// List files and directories in a given path relative or absolute idk prob relative :pray:
     Ls {
         /// The path to list files from (defaults to current directory)
         path: Option<PathBuf>,
@@ -42,13 +42,19 @@ pub enum Commands {
 pub enum SpamCommands {
     /// Spam print logs in terminal by a counter
     Counter {
+        /// Content of what you want to spam print
         content: String,
+
+        /// Counter for how many times you wanan print
         counter: i32,
     },
 
     /// Spam print logs in terminal by a duration (seconds)
     Duration {
+        /// Content of what you want to spam print..
         content: String,
+
+        /// SECONDS okay SECONDSSS
         duration: i32,
     },
 }
