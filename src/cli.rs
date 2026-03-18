@@ -30,4 +30,25 @@ pub enum Commands {
 
     /// Displays information about lcli and its creator
     About,
+
+    /// Spam logs using nested subcommands
+    Spam {
+        #[command(subcommand)]
+        command: SpamCommands,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+pub enum SpamCommands {
+    /// Spam print logs in terminal by a counter
+    Counter {
+        content: String,
+        counter: i32,
+    },
+
+    /// Spam print logs in terminal by a duration (seconds)
+    Duration {
+        content: String,
+        duration: i32,
+    },
 }

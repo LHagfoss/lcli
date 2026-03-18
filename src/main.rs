@@ -2,7 +2,7 @@ mod cli;
 mod commands;
 
 use clap::Parser;
-use cli::{Cli, Commands};
+use cli::{Cli, Commands, SpamCommands};
 
 fn main() {
     let cli = Cli::parse();
@@ -17,6 +17,16 @@ fn main() {
         }
         Some(Commands::About) => {
             commands::about::handle_about_command();
+        }
+        Some(Commands::Spam { command }) => {
+            match command {
+                SpamCommands::Counter { content, counter } => {
+                    commands::spam::handle_spam_counter_command(&content, counter);
+                }
+                SpamCommands::Duration { content, duration } => {
+                    commands::spam::handle_spam_duration_command(&content, duration);
+                }
+            }
         }
         None => {
             println!("Welcome to lcli! Use --help for more information.");
