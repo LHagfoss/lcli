@@ -20,7 +20,7 @@ pub struct Cli {
 #[derive(Debug, Subcommand)]
 pub enum Commands {
     /// List files and directories in a given path
-    List {
+    Ls {
         /// The path to list files from (defaults to current directory)
         path: Option<PathBuf>,
     },

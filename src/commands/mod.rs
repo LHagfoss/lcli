@@ -1,3 +1,3 @@
 pub mod about;
-pub mod list;
+pub mod ls;
 pub mod time;
