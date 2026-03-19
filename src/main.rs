@@ -2,7 +2,7 @@ mod cli;
 mod commands;
 
 use clap::Parser;
-use cli::{Cli, Commands, SpamCommands, QuoteCommands, CalcCommands};
+use cli::{Cli, Commands, SpamCommands, QuoteCommands, CalcCommands, FileCommands};
 
 fn main() {
     let cli = Cli::parse();
@@ -51,6 +51,23 @@ fn main() {
                 }
                 SpamCommands::Duration { content, duration } => {
                     commands::spam::handle_spam_duration_command(&content, duration);
+                }
+            }
+        }
+        Some(Commands::File { command }) => {
+            match command {
+                FileCommands::New { name, path } => {
+                    let dir = path.unwrap_or_else(|| std::env::current_dir().unwrap());
+                    commands::file::handle_new_file(&name, &dir);
+                }
+                FileCommands::Delete { path } => {
+                    commands::file::handle_delete_file(&path);
+                }
+                FileCommands::Rename { old_path, new_name } => {
+                    commands::file::handle_rename_file(&old_path, &new_name);
+                }
+                FileCommands::Move { old_path, new_path } => {
+                    commands::file::handle_move_file(&old_path, &new_path);
                 }
             }
         }

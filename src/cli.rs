@@ -48,35 +48,25 @@ pub enum Commands {
         #[command(subcommand)]
         command: SpamCommands,
     },
+
+    File {
+        #[command(subcommand)]
+        command: FileCommands,
+    }
 }
 
 #[derive(Debug, Subcommand)]
 pub enum CalcCommands {
-    Add {
-        a: i32,
-        b: i32,
-    },
-    Subtract {
-        a: i32,
-        b: i32,
-    },
-    Multiply {
-        a: i32,
-        b: i32,
-    },
-    Divide {
-        a: i32,
-        b: i32,
-    },
+    Add { a: i32, b: i32 },
+    Subtract { a: i32, b: i32 },
+    Multiply { a: i32, b: i32 },
+    Divide { a: i32, b: i32 },
 }
 
 #[derive(Debug, Subcommand)]
 pub enum QuoteCommands {
     Random,
-    Create  {
-        quote: String,
-        author: String,
-    },
+    Create { quote: String, author: String },
 }
 
 #[derive(Debug, Subcommand)]
@@ -97,5 +87,28 @@ pub enum SpamCommands {
 
         /// SECONDS okay SECONDSSS
         duration: i32,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+pub enum FileCommands {
+    /// Create a new empty file
+    New {
+        /// Name of the new file
+        name: String,
+        /// Directory to create it in (defaults to current directory)
+        path: Option<PathBuf>,
+    },
+    /// Delete a file
+    Delete { path: PathBuf },
+    /// Move a file to a new directory
+    Move {
+        old_path: PathBuf,
+        new_path: PathBuf,
+    },
+    /// Rename a file
+    Rename {
+        old_path: PathBuf,
+        new_name: PathBuf,
     },
 }

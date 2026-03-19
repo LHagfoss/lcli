@@ -6,6 +6,8 @@
 
 A command-line tool built with Rust made by awesome sauce lagos (me).
 
+<img src="img.png">
+
 ## Installation
 
 *coming soon...*
