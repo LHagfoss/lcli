@@ -31,10 +31,25 @@ pub enum Commands {
     /// Displays information about lcli and its creator
     About,
 
+    /// Fetch and print a random quote
+    Quote {
+        #[command(subcommand)]
+        command: QuoteCommands,
+    },
+
     /// Spam logs using nested subcommands
     Spam {
         #[command(subcommand)]
         command: SpamCommands,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+pub enum QuoteCommands {
+    Random,
+    Create  {
+        quote: String,
+        author: String,
     },
 }
 
