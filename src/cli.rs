@@ -61,7 +61,7 @@ pub enum CalcCommands {
     Subtract { a: i32, b: i32 },
     Multiply { a: i32, b: i32 },
     Divide { a: i32, b: i32 },
-    Sqrt { a: u64 }
+    Sqrt { a: f64 }
 }
 
 #[derive(Debug, Subcommand)]

@@ -44,8 +44,8 @@ lcli calc add 5 3          # Add two numbers (5 + 3)
 lcli calc subtract 10 4    # Subtract two numbers (10 - 4)
 lcli calc multiply 6 7     # Multiply two numbers (6 * 7)
 lcli calc divide 20 4      # Divide two numbers (20 / 4)
-lcli calc sqrt 144         # Integer square root (12)
-lcli calc sqrt 15          # Integer square root floor (3)
+lcli calc sqrt 25          # Square root (5)
+lcli calc sqrt 32          # Square root (5.656854)
 ```
 
 ### Quotes

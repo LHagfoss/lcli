@@ -19,25 +19,41 @@ pub fn handle_divide_command(a: i32, b: i32) {
     println!("{} / {} = {}", a, b, a / b);
 }
 
-pub fn handle_square_root_command(a: u64) {
-    let result = integer_sqrt(a);
+pub fn handle_square_root_command(a: f64) {
+    if a < 0.0 {
+        println!("Cannot calculate square root of a negative number.");
+        return;
+    }
 
-    println!("Square root of {} is {}", a, result);
+    let result = sqrt_newton(a);
+
+    if is_whole_number(result) {
+        println!("Square root of {} is {}", a, result as u64);
+    } else {
+        println!("Square root of {} is {:.6}", a, result);
+    }
 }
 
-fn integer_sqrt(n: u64) -> u64 {
-    if n < 2 {
-        return n;
+fn sqrt_newton(value: f64) -> f64 {
+    if value == 0.0 {
+        return 0.0;
     }
 
-    let n128 = n as u128;
-    let mut x0 = n128;
-    let mut x1 = (x0 + n128 / x0) / 2;
+    let mut x = if value >= 1.0 { value } else { 1.0 };
+    let tolerance = 1e-12;
+    let max_iterations = 100;
 
-    while x1 < x0 {
-        x0 = x1;
-        x1 = (x0 + n128 / x0) / 2;
+    for _ in 0..max_iterations {
+        let next = 0.5 * (x + value / x);
+        if (next - x).abs() < tolerance {
+            return next;
+        }
+        x = next;
     }
 
-    x0 as u64
+    x
+}
+
+fn is_whole_number(value: f64) -> bool {
+    (value - value.round()).abs() < 1e-9
 }
