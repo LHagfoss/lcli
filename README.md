@@ -1,4 +1,3 @@
-<img src="img.png">
 
 # lcli
 
@@ -7,6 +6,8 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/lhagfoss/lcli/rust.yml?branch=main&style=for-the-badge)](https://github.com/lhagfoss/lcli/actions)
 
 A command-line tool built with Rust made by awesome sauce lagos (me).
+
+<img src="img.png">
 
 ## Installation
 
