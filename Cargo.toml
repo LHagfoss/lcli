@@ -23,3 +23,4 @@ serde = { version = "1.0.219", features = ["derive"] }
 dirs = "6.0.0"
 console = "0.15.11"
 reqwest = { version = "0.12.15", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+clap_complete = "4.6.0"
