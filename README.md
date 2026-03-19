@@ -22,26 +22,57 @@ This will put the `lcli` binary in your `~/.cargo/bin` folder, which should alre
 
 ## Usage
 
-- `lcli ls [path]` - List files and directories in a given path (defaults to current directory).
-- `lcli time` - Display the current local time in a pretty format.
-- `lcli about` - Displays information about lcli and its creator.
-- `lcli calc <COMMAND>` - Simple calculator with subcommands:
-  - `add <A> <B>` - Add two numbers.
-  - `subtract <A> <B>` - Subtract two numbers.
-  - `multiply <A> <B>` - Multiply two numbers.
-  - `divide <A> <B>` - Divide two numbers.
-- `lcli quote <COMMAND>` - Fetch and manage quotes:
-  - `random` - Fetch and print a random quote.
-  - `create <QUOTE> <AUTHOR>` - Create and store a custom quote.
-- `lcli spam <COMMAND>` - Spam print logs to terminal:
-  - `counter <CONTENT> <COUNT>` - Spam print content by a counter.
-  - `duration <CONTENT> <SECONDS>` - Spam print content for a duration (in seconds).
-- `lcli file <COMMAND>` - File operations:
-  - `new <NAME> [PATH]` - Create a new empty file (defaults to current directory).
-  - `delete <PATH>` - Delete a file.
-  - `move <OLD_PATH> <NEW_PATH>` - Move a file to a new directory.
-  - `rename <OLD_PATH> <NEW_NAME>` - Rename a file.
-- `lcli --json ...` - Get output in JSON format for scripting (works with most commands).
+### List Files and Directories
+```bash
+lcli ls                    # List files in current directory
+lcli ls /path/to/dir      # List files in a specific directory
+```
+
+### Display Current Time
+```bash
+lcli time                  # Show the current local time in pretty format
+```
+
+### About
+```bash
+lcli about                 # Display information about lcli and its creator
+```
+
+### Calculator
+```bash
+lcli calc add 5 3          # Add two numbers (5 + 3)
+lcli calc subtract 10 4    # Subtract two numbers (10 - 4)
+lcli calc multiply 6 7     # Multiply two numbers (6 * 7)
+lcli calc divide 20 4      # Divide two numbers (20 / 4)
+```
+
+### Quotes
+```bash
+lcli quote random          # Fetch and print a random quote
+lcli quote create "Be yourself" "Oscar Wilde"  # Create a custom quote
+```
+
+### Spam Logging
+```bash
+lcli spam counter "Hello" 5        # Print "Hello" 5 times
+lcli spam duration "Processing" 3  # Print "Processing" for 3 seconds
+```
+
+### File Operations
+```bash
+lcli file new myfile.txt                       # Create a new file in current directory
+lcli file new myfile.txt /path/to/dir         # Create a new file in a specific directory
+lcli file delete /path/to/file.txt            # Delete a file
+lcli file move /path/to/old.txt /path/to/new.txt    # Move a file
+lcli file rename /path/to/old.txt /path/to/newname.txt  # Rename a file
+```
+
+### JSON Output
+```bash
+lcli ls --json                  # Get ls output in JSON format
+lcli time --json                # Get time output in JSON format
+lcli quote random --json        # Get quote output in JSON format
+```
 
 ## Development
 
