@@ -2,7 +2,7 @@ mod cli;
 mod commands;
 
 use clap::Parser;
-use cli::{Cli, Commands, SpamCommands, QuoteCommands};
+use cli::{Cli, Commands, SpamCommands, QuoteCommands, CalcCommands};
 
 fn main() {
     let cli = Cli::parse();
@@ -10,13 +10,29 @@ fn main() {
     match cli.command {
         Some(Commands::Ls { path }) => {
             let path = path.unwrap_or_else(|| std::env::current_dir().unwrap());
-            commands::ls::handle_ls_command(&path, cli.json); 
+            commands::ls::handle_ls_command(&path, cli.json);
         }
         Some(Commands::Time) => {
             commands::time::handle_time_command(cli.json);
         }
         Some(Commands::About) => {
             commands::about::handle_about_command();
+        }
+        Some(Commands::Calc { command }) => {
+            match command {
+                CalcCommands::Add { a, b } => {
+                    commands::calc::add(a, b);
+                }
+                CalcCommands::Subtract { a, b } => {
+                    commands::calc::subtract(a, b);
+                }
+                CalcCommands::Multiply { a, b } => {
+                    commands::calc::multiply(a, b);
+                }
+                CalcCommands::Divide { a, b } => {
+                    commands::calc::divide(a, b);
+                }
+            }
         }
         Some(Commands::Quote { command }) => {
             match command {

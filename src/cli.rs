@@ -31,6 +31,12 @@ pub enum Commands {
     /// Displays information about lcli and its creator
     About,
 
+    /// Calc is slang for calculator :nerd:
+    Calc {
+        #[command(subcommand)]
+        command: CalcCommands,
+    },
+
     /// Fetch and print a random quote
     Quote {
         #[command(subcommand)]
@@ -41,6 +47,26 @@ pub enum Commands {
     Spam {
         #[command(subcommand)]
         command: SpamCommands,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+pub enum CalcCommands {
+    Add {
+        a: i32,
+        b: i32,
+    },
+    Subtract {
+        a: i32,
+        b: i32,
+    },
+    Multiply {
+        a: i32,
+        b: i32,
+    },
+    Divide {
+        a: i32,
+        b: i32,
     },
 }
 

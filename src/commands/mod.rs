@@ -3,3 +3,4 @@ pub mod ls;
 pub mod time;
 pub mod spam;
 pub mod quote;
+pub mod calc;
