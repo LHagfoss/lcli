@@ -21,16 +21,19 @@ fn main() {
         Some(Commands::Calc { command }) => {
             match command {
                 CalcCommands::Add { a, b } => {
-                    commands::calc::add(a, b);
+                    commands::calc::handle_add_command(a, b);
                 }
                 CalcCommands::Subtract { a, b } => {
-                    commands::calc::subtract(a, b);
+                    commands::calc::handle_subtract_command(a, b);
                 }
                 CalcCommands::Multiply { a, b } => {
-                    commands::calc::multiply(a, b);
+                    commands::calc::handle_multiply_command(a, b);
                 }
                 CalcCommands::Divide { a, b } => {
-                    commands::calc::divide(a, b);
+                    commands::calc::handle_divide_command(a, b);
+                }
+                CalcCommands::Sqrt { a } => {
+                    commands::calc::handle_square_root_command(a);
                 }
             }
         }
